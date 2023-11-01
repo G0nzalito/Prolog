@@ -37,3 +37,5 @@ enfermo_de(Sintoma, A) :- sintoma(Sintoma, A).
 remeDio_para(Sintoma, Remedio) :-  sintoma(Sintoma, Enfermedad), remedio(Remedio, Enfermedad).
 sintomas_de(Enfermo, Sintoma) :- enfermo(Enfermo, Enfermedad), sintoma(Sintoma, Enfermedad).
 
+%Esta resuelto
+

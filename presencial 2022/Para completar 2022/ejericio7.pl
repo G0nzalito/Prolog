@@ -58,3 +58,4 @@ regla5(Legajo, Nombre, Apellido, Area, Localidad) :- trabajador(Legajo, Nombre, 
 regla6(Legajo, Salario) :-  (trabajador(Legajo, _, _, domicilio(_,_,_), _, contrato(CantDias,PrecHora,HsDia)), not(CantDias =:= (-1)), Salario is CantDias * PrecHora * HsDia); 
                             (trabajador(Legajo, _, _, domicilio(_,_,_), _, efectivo(Basico,_,_)), not(Basico =:= (-1)), regla4(Legajo, Salario)).    
 
+%Esta resuelto

@@ -30,4 +30,5 @@ estaVigente2(Nombre) :-
 % por ningun usuario premium ni trial.
 %
 esta_disponible(Nombre) :- not(estaVigente2(Nombre); (usuario(_, premium(Nombre1,_)), Nombre == Nombre1)).   
-        
+
+%Esta resuelto
