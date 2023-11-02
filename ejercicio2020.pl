@@ -32,24 +32,12 @@ hijos(10101, ['maximo','matias','leo']).
 hijos(10021,['tiziana']).
 hijos(10034,[]).
 
-% Determinar Nombre, Dirección completa y
+% Determinar Nombre, Direcciï¿½n completa y
 % Refrigerio de los choferes que
-% tiene tramos con Origen en la Ciudad de Córdoba
+% tiene tramos con Origen en la Ciudad de Cï¿½rdoba
 %
-% En item1 esta repetidos porque un chofer puede tener más de un tramo
-item1(Nombre,Calle,Numero,Refrigerio):-
+% En item1 esta repetidos porque un chofer puede tener mï¿½s de un tramo
 
-    chofer(Leg,Nombre,direccion(Calle,Numero),_,
-           Refrigerio,_),
-    tramo(_,_,_,Origen,_,Leg),
-    localidad(Origen,'Cordoba').
-
-
-item1_op(ResLista):-
-    findall((Nombre,Calle,Numero,Refrigerio) ,
-            item1(Nombre,Calle,Numero,Refrigerio) ,
-            Lista),
-    sort(Lista,ResLista).
 
 % Informar el Nombre del chofer, la localidad de origen, la localidad
 % de destino y el nombre del tramo de
@@ -57,86 +45,33 @@ item1_op(ResLista):-
 % un valor de referencia
 
 
-item2(Nombre,Origen,Destino,Tramo,X):-
-    chofer(Leg,Nombre,_,_,_,_),
-    tramo(_,Tramo,Distancia,NumOrigen,NumDestino,Leg),
-    localidad(NumOrigen,Origen),
-    localidad(NumDestino,Destino),
-    X < Distancia.
 
 
 
 % 3. Determinar por cada chofer cual es el total que se le paga por
 % recorrer el tramo asignado sabiendo que el total se calcula como el
-% producto entre la distancia del tramo por el precio por kilómetro
-% más un 20% adicional si cobra refrigerio.
-
-item3(Nom, Tramo,Total):-
-    chofer(Leg,Nom,_,Precio,Ref,_),
-    tramo(_,Tramo,Distancia,_,_,Leg),
-    Total is Distancia * Precio,
-    (
-
-          (Ref=='Si', Total is Total + Total * 20 / 100)
-           ;
-          (Ref=='No', Total is Total)
-    ).
-
+% producto entre la distancia del tramo por el precio por kilï¿½metro
+% mï¿½s un 20% adicional si cobra refrigerio.
 
 
 %4. Indicar la cantidad de choferes que tienen un tipo de licencia X.
 
-item4(X,Cantidad):-
-    findall(Nom,
-           chofer(_,Nom,_,_,_,licencia(_,X)),
-            ListaAux
-           ),
-    length(ListaAux, Cantidad).
 
 
 
 %5. Indicar la cantidad de tramos definidos para un Origen X.
 
-item5(X,Cantidad):-
-    findall(Num,
-           tramo(Num,_,_,X,_,_),
-           ListaAux
-           ),
-    length(ListaAux, Cantidad).
 
 
-%6. Listar el nombre del chofer, la dirección, el total a cobrar de
+
+%6. Listar el nombre del chofer, la direcciï¿½n, el total a cobrar de
 % todos aquellos choferes que tengan la licencia de un tipo X.
 
-item6_aux(Nom,Calle,Numero,Total,X):-
-    chofer(Leg,Nom,direccion(Calle,Numero),_,_,licencia(_,X)),
-    tramo(_,Tramo,_,_,_,Leg),
-    item3(Nom, Tramo,Total).
-
-item6(X,Lista):-
-
-    findall(
-             (Nom,Calle,Numero,Total),
-              item6_aux(Nom,Calle,Numero,Total,X),
-              ListaAux
-    ),
-    sort(ListaAux, Lista).
-
-
-%
-% Distancia total recorrida en todos los tramos
-%
-%
-reglaExtra(TotalKmRecorridos):-
-    findall(Distancia,
-           tramo(_,_,Distancia,_,_,_),
-            ListaAux
-           ),
-    sumlist(ListaAux,TotalKmRecorridos).
 
 
 
-%7. Indicar el nombre de los choferes que tienen más de 2 hijos.
+
+%7. Indicar el nombre de los choferes que tienen mï¿½s de 2 hijos.
 % Resultado:
 % ?-  punto7(Nombre).
 % Nombre = 'Jose_de_la_Prueba'
@@ -154,7 +89,7 @@ reglaExtra(TotalKmRecorridos):-
 %hijos(10034,[]).
 
 
-% 9. Mostrar el sueldo que perciben los choferes que tienen más de 2
+% 9. Mostrar el sueldo que perciben los choferes que tienen mï¿½s de 2
 % hijos.
 % Resultado:
 %?- punto9(Nombre,Monto).
@@ -165,5 +100,77 @@ reglaExtra(TotalKmRecorridos):-
 
 % EXTRA
 % Desarrollar una regla que indique si existe o no
-% un chofer con una licencia que se vence en el año 2018.
+% un chofer con una licencia que se vence en el aï¿½o 2018.
 
+% Soluciones 
+%item1(Nombre,Calle,Numero,Refrigerio):-
+
+%    chofer(Leg,Nombre,direccion(Calle,Numero),_,
+%           Refrigerio,_),
+%    tramo(_,_,_,Origen,_,Leg),
+%    localidad(Origen,'Cordoba').
+
+
+%item1_op(ResLista):-
+%    findall((Nombre,Calle,Numero,Refrigerio) ,
+%            item1(Nombre,Calle,Numero,Refrigerio) ,
+%            Lista),
+%    sort(Lista,ResLista).
+
+%item2(Nombre,Origen,Destino,Tramo,X):-
+%    chofer(Leg,Nombre,_,_,_,_),
+%    tramo(_,Tramo,Distancia,NumOrigen,NumDestino,Leg),
+%    localidad(NumOrigen,Origen),
+%    localidad(NumDestino,Destino),
+%    X < Distancia.
+
+%item3(Nom, Tramo,Total):-
+%    chofer(Leg,Nom,_,Precio,Ref,_),
+%    tramo(_,Tramo,Distancia,_,_,Leg),
+%    Total is Distancia * Precio,
+ %   (
+%
+ %         (Ref=='Si', Total is Total + Total * 20 / 100)
+  %         ;
+   %       (Ref=='No', Total is Total)
+    %).
+
+%item4(X,Cantidad):-
+ %   findall(Leg,
+  %         chofer(Leg,_,_,_,_,licencia(_,X)),
+   %         ListaAux
+    %       ),
+ %   length(ListaAux, Cantidad).
+
+%item5(X,Cantidad):-
+    %findall(Num,
+   %        tramo(Num,_,_,X,_,_),
+  %         ListaAux
+ %          ),
+%    length(ListaAux, Cantidad).
+
+%item6_aux(Nom,Calle,Numero,Total,X):-
+  %  chofer(Leg,Nom,direccion(Calle,Numero),_,_,licencia(_,X)),
+ %   tramo(_,Tramo,_,_,_,Leg),
+ %   item3(Nom, Tramo,Total).
+
+%item6(X,Lista):-
+%
+%    findall(
+%             (Nom,Calle,Numero,Total),
+%              item6_aux(Nom,Calle,Numero,Total,X),
+%              ListaAux
+%    ),
+%    sort(ListaAux, Lista).
+
+
+%
+% Distancia total recorrida en todos los tramos
+%
+%
+%reglaExtra(TotalKmRecorridos):-
+%    findall(Distancia,
+%           tramo(_,_,Distancia,_,_,_),
+%            ListaAux
+%           ),
+%    sumlist(ListaAux,TotalKmRecorridos).
