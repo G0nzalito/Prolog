@@ -36,9 +36,10 @@ regla2(NumeroVuelo, Linea, Procedencia) :- vuelo(NumeroVuelo, Procedencia,_ , _,
 %  3. Informar n�mero de vuelo, procedencia y hora estimada de arribo de
 % los arribos que pertenezcan a un determinado nombre de l�nea.
 
-
+regla3(NmoVuelo, Procedencia, HoraArribo, NomLinea) :- vuelo(NmoVuelo, Procedencia, _, HoraArribo, _, CodigoLinea), linea(CodigoLinea, NomLinea).
 
 %  4. Mostrar procedencia y hora de arribo de los vuelos cuyo estado es
 % Aterrizado.
 
+regla4(Procedencia, HoraArribo) :- vuelo(_, Procedencia, _, HoraArribo, 'Aterrizado', _).
 
